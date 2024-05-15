@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test';
 
-test('Test Case 0: Crear usuario de prueba', async ({ page }) => {
+test('Test Case 1: Register User', {tag:'@Todos'}, async ({ page }) => {
   await page.goto('https://automationexercise.com/');
   await expect(page.getByRole('link', { name: 'Home' })).toBeVisible();
   await page.getByRole('link', { name: 'Signup / Login' }).click();
   await expect(page.locator('#form')).toContainText('New User Signup!');
   await page.getByPlaceholder('Name').click();
-  await page.getByPlaceholder('Name').fill('testing012024');
+  await page.getByPlaceholder('Name').fill('testing0120245');
   await page.getByPlaceholder('Name').press('Tab');
-  await page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').fill('warriol.game@gmail.com');
+  await page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').fill('warriol.game1@gmail.com');
   await page.getByRole('button', { name: 'Signup' }).click();
   await expect(page.locator('#form')).toContainText('Enter Account Information');
   await page.getByLabel('Mr.').check();
@@ -41,5 +41,9 @@ test('Test Case 0: Crear usuario de prueba', async ({ page }) => {
   await page.getByRole('button', { name: 'Create Account' }).click();
   await expect(page.locator('b')).toContainText('Account Created!');
   await page.getByRole('link', { name: 'Continue' }).click();
-  await expect(page.locator('#header')).toContainText('Logged in as testing012024');
+  await expect(page.locator('#header')).toContainText('Logged in as testing0120245');
+  await page.getByRole('link', { name: 'Delete Account' }).click();
+  // await page.frameLocator('iframe[name="aswift_5"]').getByLabel('Close ad').click();
+  await expect(page.locator('b')).toContainText('Account Deleted!');
+  await page.getByRole('link', { name: 'Continue' }).click();
 });

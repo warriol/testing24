@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Test Case 2: Login User with correct email and password', async ({ page }) => {
+test('Test Case 2: Login User with correct email and password', {tag:'@Todos'}, async ({ page }) => {
   await page.goto('https://automationexercise.com/');
   await expect(page.getByRole('link', { name: 'Home' })).toBeVisible();
   await page.getByRole('link', { name: 'Signup / Login' }).click();
