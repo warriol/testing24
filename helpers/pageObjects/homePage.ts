@@ -8,6 +8,18 @@ export class HomePage {
     this.page = page;
   }
 
+  async blockGoogleAds(page) {
+    // watch all network activity
+    await this.page.route('**/*', (route) => {
+      // abort requests from known ad domains
+      if (route.request().url().includes('cdn.ads.com')) {
+        route.abort();
+      } else {
+        route.continue();
+      }
+    });
+  }
+
   async navigate() {
     await this.page.goto('http://automationexercise.com');
   }

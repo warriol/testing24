@@ -1,41 +1,45 @@
 ## Integrantes
 
-Leandro Rodriguez : elleo1190@gmail.com
-Damian Vera : damivera47@gmail.com
-Wilson Arriola : warriol@gmail.com
+- Leandro Rodriguez : elleo1190@gmail.com
+- Damian Vera : damivera47@gmail.com
+- Wilson Arriola : warriol@gmail.com
 
 # instalacion
+```bash
 npx playwright install 
 npm init playwright@latest
+```
 
 # url para automatizar casos de prueba
 https://automationexercise.com/test_cases
 
 # Entorno de desarrollo
 
-Visual Studio Code
+- Visual Studio Code
 
 ## complementos
-- Playwright test
-- npm i --save-dev @playwright/test
+```bash
+# Playwright test
+npm i --save-dev @playwright/test
+```
 
 # url casos de uso obligatorios
 https://automationexercise.com/api_list
 
 # cuenta de prueba
-correo: warriol.game@gmail.com
-usuario: testing012024
-contraseña: test12345678
+- correo: warriol.game@gmail.com
+- usuario: testing012024
+- contraseña: test12345678
 
 # división de casos de uso por integrantes
 
-# todo
+## todo
 npx playwright test --grep "@Todos"
 
 - [Test Case 1: Register User](https://automationexercise.com/test_cases#collapse1)
 - [Test Case 2: Login User with correct email and password](https://automationexercise.com/test_cases#collapse2)
 
-# damian
+## damian
 
 - [Test Case 3: Login User with incorrect email and password](https://automationexercise.com/test_cases#collapse3)
 - [Test Case 4: Logout User](https://automationexercise.com/test_cases#collapse4)
@@ -46,7 +50,7 @@ npx playwright test --grep "@Todos"
 - [Test Case 9: Search Product](https://automationexercise.com/test_cases#collapse9)
 - [Test Case 10: Verify Subscription in home page](https://automationexercise.com/test_cases#collapse10)
 
-# leandro
+## leandro
 
 - [Test Case 11: Verify Subscription in Cart page](https://automationexercise.com/test_cases#collapse11)
 - [Test Case 12: Add Products in Cart](https://automationexercise.com/test_cases#collapse12)
@@ -57,10 +61,12 @@ npx playwright test --grep "@Todos"
 - [Test Case 17: Remove Products From Cart](https://automationexercise.com/test_cases#collapse17)
 - [Test Case 18: View Category Products](https://automationexercise.com/test_cases#collapse18)
 
-# wilson
+## wilson
 
-## probar solo las pruebas de wilson
+```bash
+# probar solo las pruebas de wilson
 npx playwright test --grep "@wilson"
+```
 
 - [Test Case 19: View & Cart Brand Products](https://automationexercise.com/test_cases#collapse19)
 - [Test Case 20: Search Products and Verify Cart After Login](https://automationexercise.com/test_cases#collapse20)
@@ -75,10 +81,8 @@ npx playwright test --grep "@wilson"
 # escribir el primer test UC1
 npx playwright codegen http://automationexercise.com
 
-
-
-
-
+# bloquear anuncios
+npm install --save @cliqz/adblocker-playwright
 
 # ejecutar test
 npx playwright test
@@ -96,14 +100,20 @@ npx playwright test primer --debug
 
 # en el codigo pongo pausa
 await page.pause()
-# se eejcuta de esta forma
-$env:PWDEBUG="console"; npx playwright test primer
 
+# se eejcuta de esta forma
+```bash
+$env:PWDEBUG="console"; npx playwright test primer
+```
 
 # api log
+```bash
 $env:PWDEBUG="pw:api"; npx playwright test primer
 $env:PWDEBUG=""; npx playwright test --trace on primer
+```
 
 # huellas y rastros
+```bash
 npx playwright test primer primer --trace on primer
 npx playwright show-report
+```
