@@ -1,28 +1,31 @@
 import { test, expect } from '@playwright/test';
+import { UserHelper } from '../../helpers/utils/users';
 
 test('Test Case 0: Crear usuario de prueba', {tag:'@Todos'}, async ({ page }) => {
+  const userHelper = new UserHelper(page);
+
   await page.goto('https://automationexercise.com/');
   await expect(page.getByRole('link', { name: 'Home' })).toBeVisible();
   await page.getByRole('link', { name: 'Signup / Login' }).click();
   await expect(page.locator('#form')).toContainText('New User Signup!');
   await page.getByPlaceholder('Name').click();
-  await page.getByPlaceholder('Name').fill('testing012024');
+  await page.getByPlaceholder('Name').fill(await userHelper.getUser());
   await page.getByPlaceholder('Name').press('Tab');
-  await page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').fill('warriol.game@gmail.com');
+  await page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').fill(await userHelper.getCorreo());
   await page.getByRole('button', { name: 'Signup' }).click();
   await expect(page.locator('#form')).toContainText('Enter Account Information');
   await page.getByLabel('Mr.').check();
   await page.getByLabel('Password *').click();
-  await page.getByLabel('Password *').fill('test12345678');
+  await page.getByLabel('Password *').fill(await userHelper.getPassword());
   await page.locator('#days').selectOption('8');
   await page.locator('#months').selectOption('2');
   await page.locator('#years').selectOption('1980');
   await page.getByLabel('Sign up for our newsletter!').check();
   await page.getByLabel('Receive special offers from').check();
   await page.getByLabel('First name *').click();
-  await page.getByLabel('First name *').fill('yona');
+  await page.getByLabel('First name *').fill(await userHelper.getFName());
   await page.getByLabel('First name *').press('Tab');
-  await page.getByLabel('Last name *').fill('pla');
+  await page.getByLabel('Last name *').fill(await userHelper.getLName());
   await page.getByLabel('Last name *').press('Tab');
   await page.getByLabel('Company', { exact: true }).fill('utu');
   await page.getByLabel('Address * (Street address, P.').click();
@@ -42,4 +45,6 @@ test('Test Case 0: Crear usuario de prueba', {tag:'@Todos'}, async ({ page }) =>
   await expect(page.locator('b')).toContainText('Account Created!');
   await page.getByRole('link', { name: 'Continue' }).click();
   await expect(page.locator('#header')).toContainText('Logged in as testing012024');
+  await page.getByRole('link', { name: 'Logout' }).click();
+  console.log('Usuario creado correctamente, fin del caso de prueba 0.');
 });

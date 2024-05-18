@@ -9,6 +9,10 @@
 npx playwright install 
 npm init playwright@latest
 ```
+# personalizar mensajes en consola
+```bash
+npm install chalk
+```
 
 # url para automatizar casos de prueba
 https://automationexercise.com/test_cases
