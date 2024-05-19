@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { UserHelper } from '../../helpers/utils/users';
+import { UserHelper } from '../../helpers/utils/userHelper';
 
 test('Test Case 0: Crear usuario de prueba', {tag:'@Todos'}, async ({ page }) => {
   const userHelper = new UserHelper(page);

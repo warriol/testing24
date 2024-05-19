@@ -1,12 +1,17 @@
 import { test, expect } from '@playwright/test';
 import { PlaywrightBlocker } from '@cliqz/adblocker-playwright';
-import { UserHelper } from '../../../helpers/utils/users';
+import { UserHelper } from '../../../helpers/utils/userHelper';
 import { MensajesConsola } from '../../../helpers/utils/mensajesConsola';
+import { verificarInicioDeSesion } from '../../../helpers/utils/iniciarSesion';
+import { ProductsPage } from '../../../helpers/pageObjects/productsPage';
+import { RegistrarUsuario } from '../../../helpers/utils/registrarUsuario';
 
 test.describe('Test realizados por Wilson Arriola', {tag:'@wilson'}, () => {
-
+    // datos para la creación de usuarios
     const userHelper = new UserHelper();
-
+    // Arreglo de productos a verificar
+    const productos = new ProductsPage().seleccionarProducto();
+    // Configurar el bloqueador de anuncios
     test.beforeEach(async ({ page }) => {
         // Configura el bloqueador de anuncios antes de la navegación
         const blocker = await PlaywrightBlocker.fromPrebuiltAdsAndTracking(fetch);
@@ -52,50 +57,24 @@ test.describe('Test realizados por Wilson Arriola', {tag:'@wilson'}, () => {
         // 6. Verify 'SEARCHED PRODUCTS' is visible
         await expect(page.getByRole('heading', { name: 'Searched Products' })).toBeVisible();
         // 7. Verify all the products related to search are visible
-        await expect(page.getByText('Rs. 500 Blue Top Add to cart').nth(1)).toBeVisible();
-        await expect(page.getByText('Rs. 478 Sleeves Top and Short').nth(1)).toBeVisible();
-        await expect(page.getByText('Rs. 1530 Blue Cotton Indie').nth(1)).toBeVisible();
-        await expect(page.getByText('Rs. 849 Colour Blocked Shirt').nth(1)).toBeVisible();
-        await expect(page.getByText('Rs. 1400 Grunt Blue Slim Fit').nth(1)).toBeVisible();
-        await expect(page.getByText('Rs. 5000 Beautiful Peacock').nth(1)).toBeVisible();
-        await expect(page.getByText('Rs. 1389 GRAPHIC DESIGN MEN T').nth(1)).toBeVisible();
+        // Iterar sobre el arreglo y verificar cada nombre de producto
+        for (const producto of productos) {
+            await expect(page.getByText(producto.nombre).nth(1)).toBeVisible();
+        }
         // 8. Add those products to cart
-        await page.locator('.productinfo > .btn').first().click();
-        await expect(page.getByRole('heading', { name: 'Added!' })).toBeVisible();
-        await page.getByRole('button', { name: 'Continue Shopping' }).click();
-        await page.hover('body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(4) > div > div.single-products > div.productinfo.text-center');
-        await page.locator('div:nth-child(4) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn').click();
-        await expect(page.getByRole('heading', { name: 'Added!' })).toBeVisible();
-        await page.getByRole('button', { name: 'Continue Shopping' }).click();
-        await page.hover('body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(5) > div > div.single-products > div.productinfo.text-center');
-        await page.locator('div:nth-child(5) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn').click();
-        await expect(page.getByRole('heading', { name: 'Added!' })).toBeVisible();
-        await page.getByRole('button', { name: 'Continue Shopping' }).click();
-        await page.hover('body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(6) > div > div.single-products > div.productinfo.text-center');
-        await page.locator('div:nth-child(6) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn').click();
-        await expect(page.getByRole('heading', { name: 'Added!' })).toBeVisible();
-        await page.getByRole('button', { name: 'Continue Shopping' }).click();
-        await page.hover('body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(7) > div > div.single-products > div.productinfo.text-center');
-        await page.locator('div:nth-child(7) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn').click();
-        await expect(page.getByRole('heading', { name: 'Added!' })).toBeVisible();
-        await page.getByRole('button', { name: 'Continue Shopping' }).click();
-        await page.hover('body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(8) > div > div.single-products > div.productinfo.text-center');
-        await page.locator('div:nth-child(8) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn').click();
-        await expect(page.getByRole('heading', { name: 'Added!' })).toBeVisible();
-        await page.getByRole('button', { name: 'Continue Shopping' }).click();
-        await page.hover('body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(9) > div > div.single-products > div.productinfo.text-center');
-        await page.locator('div:nth-child(9) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn').click();
-        await expect(page.getByRole('heading', { name: 'Added!' })).toBeVisible();
-        await page.getByRole('button', { name: 'Continue Shopping' }).click();
+        // Iterar sobre el arreglo y agregar al carrito
+        for (const producto of productos) {
+            await page.hover(producto.hover);
+            await page.locator(producto.locator).click();
+            await expect(page.getByRole('heading', { name: 'Added!' })).toBeVisible();
+            await page.getByRole('button', { name: 'Continue Shopping' }).click();
+        }
         // 9. Click 'Cart' button and verify that products are visible in cart
         await page.getByRole('link', { name: 'Cart' }).click();
-        await expect(page.locator('#product-1')).toContainText('Blue Top');
-        await expect(page.locator('#product-16')).toContainText('Sleeves Top and Short - Blue & Pink');
-        await expect(page.locator('#product-21')).toContainText('Blue Cotton Indie Mickey Dress');
-        await expect(page.locator('#product-24')).toContainText('Colour Blocked Shirt – Sky Blue');
-        await expect(page.locator('#product-37')).toContainText('Grunt Blue Slim Fit Jeans');
-        await expect(page.locator('#product-41')).toContainText('Beautiful Peacock Blue Cotton Linen Saree');
-        await expect(page.locator('#product-43')).toContainText('GRAPHIC DESIGN MEN T SHIRT - BLUE');
+        // Iterar sobre el arreglo y verificar cada producto y su nombre
+        for (const producto of productos) {
+            await expect(page.locator(producto.id)).toContainText(producto.nombre);
+        }
         /*
         // screenshot
         const elemento = 'div.cart_info';
@@ -105,22 +84,14 @@ test.describe('Test realizados por Wilson Arriola', {tag:'@wilson'}, () => {
         }
         */
         // 10. Click 'Signup / Login' button and submit login details
-        await page.getByRole('link', { name: 'Signup / Login' }).click();
-        await page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address').click();
-        await page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address').fill(await userHelper.getCorreo());
-        await page.getByPlaceholder('Password').click();
-        await page.getByPlaceholder('Password').fill(await userHelper.getPassword());
-        await page.getByRole('button', { name: 'Login' }).click();
+        await verificarInicioDeSesion(page, userHelper);
         // 11. Again, go to Cart page
         await page.getByRole('link', { name: 'Cart' }).click();
         // 12. Verify that those products are visible in cart after login as well
-        await expect(page.locator('#product-1')).toContainText('Blue Top');
-        await expect(page.locator('#product-16')).toContainText('Sleeves Top and Short - Blue & Pink');
-        await expect(page.locator('#product-21')).toContainText('Blue Cotton Indie Mickey Dress');
-        await expect(page.locator('#product-24')).toContainText('Colour Blocked Shirt – Sky Blue');
-        await expect(page.locator('#product-37')).toContainText('Grunt Blue Slim Fit Jeans');
-        await expect(page.locator('#product-41')).toContainText('Beautiful Peacock Blue Cotton Linen Saree');
-        await expect(page.locator('#product-43')).toContainText('GRAPHIC DESIGN MEN T SHIRT - BLUE');
+        // Iterar sobre el arreglo y verificar cada producto y su nombre
+        for (const producto of productos) {
+            await expect(page.locator(producto.id)).toContainText(producto.nombre);
+        }
         // salir
         await page.getByRole('link', { name: 'Logout' }).click();
         // fin del test
@@ -183,7 +154,60 @@ test.describe('Test realizados por Wilson Arriola', {tag:'@wilson'}, () => {
         // 1. Inicio del caso de uso número 23
         MensajesConsola.mensajeInicio('23');
         // 2. Navigate to url 'http://automationexercise.com'
-        // resto del test
+        await page.goto('https://automationexercise.com/');
+        // 3. Verify that home page is visible successfully
+        await expect(page.getByRole('link', { name: 'Home' })).toBeVisible();
+        // 4. Click 'Signup / Login' button
+        await page.getByRole('link', { name: 'Signup / Login' }).click();
+        // 5. Fill all details in Signup and create account
+        await RegistrarUsuario(page, userHelper);
+        // 6. Verify 'ACCOUNT CREATED!' and click 'Continue' button
+        await expect(page.locator('b')).toContainText('Account Created!');
+        await page.getByRole('link', { name: 'Continue' }).click();
+        // 7. Verify ' Logged in as username' at top
+        await expect(page.locator('#header')).toContainText('Logged in as ' + userHelper.registrarUsuarioDto()[0].name);
+
+        // deberia de usar el caso de uso 20 para agregar productos al carrito para reautilizar codigo, cuando fucnioe lo hago
+            // 3. Click on 'Products' button
+            await page.getByRole('link', { name: 'Products' }).click();
+            // 4. Verify user is navigated to ALL PRODUCTS page successfully
+            await expect(page.getByRole('heading', { name: 'All Products' })).toBeVisible();
+            // 5. Enter product name in search input and click search button
+            await page.getByPlaceholder('Search Product').click();
+            await page.getByPlaceholder('Search Product').fill('blue');
+            await page.getByRole('button', { name: '' }).click();
+            // 6. Verify 'SEARCHED PRODUCTS' is visible
+            await expect(page.getByRole('heading', { name: 'Searched Products' })).toBeVisible();
+            // 7. Verify all the products related to search are visible
+            // Iterar sobre el arreglo y verificar cada nombre de producto
+            for (const producto of productos) {
+                await expect(page.getByText(producto.nombre).nth(1)).toBeVisible();
+            }
+        // 8. Add those products to cart
+            // Iterar sobre el arreglo y agregar al carrito
+            for (const producto of productos) {
+                await page.hover(producto.hover);
+                await page.locator(producto.locator).click();
+                await expect(page.getByRole('heading', { name: 'Added!' })).toBeVisible();
+                await page.getByRole('button', { name: 'Continue Shopping' }).click();
+            }
+        // 9. Click 'Cart' button
+            await page.getByRole('link', { name: 'Cart' }).click();
+        // 10. Verify that cart page is displayed
+            // Iterar sobre el arreglo y verificar cada producto y su nombre
+            for (const producto of productos) {
+                await expect(page.locator(producto.id)).toContainText(producto.nombre);
+            }
+        // 11. Click Proceed To Checkout
+        await page.getByText('Proceed To Checkout').click();
+        // 12. Verify that the delivery address is same address filled at the time registration of account
+        await expect(page.locator('#address_delivery')).toContainText(userHelper.registrarUsuarioDto()[0].address);
+        // 13. Verify that the billing address is same address filled at the time registration of account
+        await expect(page.locator('#address_invoice')).toContainText(userHelper.registrarUsuarioDto()[0].address);
+        // 14. Click 'Delete Account' button
+        await page.getByRole('link', { name: 'Delete Account' }).click();
+        // 15. Verify 'ACCOUNT DELETED!' and click 'Continue' button
+        await expect(page.locator('b')).toContainText('Account Deleted!');
         // fin del test
         MensajesConsola.mensajeFin('23');
     });

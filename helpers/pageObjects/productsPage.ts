@@ -1,23 +1,16 @@
-import { Page } from '@playwright/test';
 
 export class ProductsPage {
-  private page: Page;
-  private brandSidebar = '.brands_products';
-  private brandLinks = '.brands-name a';
+  private productos = [
+      { id: '#product-1', nombre: 'Blue Top', hover: 'body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(3) > div > div.single-products > div.productinfo.text-center', locator: 'div:nth-child(3) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn' },
+      { id: '#product-16', nombre: 'Sleeves Top', hover: 'body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(4) > div > div.single-products > div.productinfo.text-center', locator: 'div:nth-child(4) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn' },
+      { id: '#product-21', nombre: 'Blue Cotton', hover: 'body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(5) > div > div.single-products > div.productinfo.text-center', locator: 'div:nth-child(5) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn' },
+      { id: '#product-24', nombre: 'Colour Blocked', hover: 'body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(6) > div > div.single-products > div.productinfo.text-center', locator: 'div:nth-child(6) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn' },
+      { id: '#product-37', nombre: 'Grunt Blue', hover: 'body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(7) > div > div.single-products > div.productinfo.text-center', locator: 'div:nth-child(7) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn' },
+      { id: '#product-41', nombre: 'Beautiful Peacock', hover: 'body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(8) > div > div.single-products > div.productinfo.text-center', locator: 'div:nth-child(8) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn' },
+      { id: '#product-43', nombre: 'GRAPHIC DESIGN', hover: 'body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(9) > div > div.single-products > div.productinfo.text-center', locator: 'div:nth-child(9) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn' },
+  ];
 
-  constructor(page: Page) {
-    this.page = page;
-  }
-
-  async isBrandSidebarVisible(div: string) {
-    return this.page.locator(`${div}`);
-  }
-
-  async clickBrand(brandName: string) {
-    await this.page.getByRole('link', { name: `${brandName}` }).click();
-  }
-
-  async isBrandPageVisible(brandName: string) {
-    return this.page.getByRole('heading', { name: `ProductsBrand - ${brandName} Products` });
+  public seleccionarProducto() {
+    return this.productos;
   }
 }
