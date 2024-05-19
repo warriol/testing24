@@ -10,5 +10,4 @@ export class MensajesConsola {
     static mensajeFin(Cu: string) {
         console.log('Fin del caso de uso número: ' + Cu);
     }
-    
 }

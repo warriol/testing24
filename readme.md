@@ -82,7 +82,7 @@ npx playwright test --grep "@wilson"
 - [Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functionality](https://automationexercise.com/test_cases#collapse26)
 
 
-# escribir el primer test UC1
+# escribir el primer test
 npx playwright codegen http://automationexercise.com
 
 # bloquear anuncios
