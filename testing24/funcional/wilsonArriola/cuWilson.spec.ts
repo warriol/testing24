@@ -6,7 +6,7 @@ import { verificarInicioDeSesion } from '../../../helpers/utils/iniciarSesion';
 import { ProductsPage } from '../../../helpers/pageObjects/productsPage';
 import { RegistrarUsuario } from '../../../helpers/utils/registrarUsuario';
 
-test.describe('Test realizados por Wilson Arriola', {tag:'@wilson'}, () => {
+test.describe('Test realizados por Wilson Arriola', {tag: ['@wilson', '@todos']}, () => {
     // datos para la creación de usuarios
     const userHelper = new UserHelper();
     // Arreglo de productos a verificar

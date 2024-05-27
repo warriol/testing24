@@ -1,47 +1,26 @@
 ## Integrantes
-
 - Leandro Rodriguez : elleo1190@gmail.com
 - Damian Vera : damivera47@gmail.com
 - Wilson Arriola : warriol@gmail.com
 
-# instalacion
-```bash
-npx playwright install 
-npm init playwright@latest
-```
-# personalizar mensajes en consola
-```bash
-npm install chalk
-```
-
-# url para automatizar casos de prueba
-https://automationexercise.com/test_cases
-
-# Entorno de desarrollo
-
-- Visual Studio Code
-
-## complementos
-```bash
-# Playwright test
-npm i --save-dev @playwright/test
-```
-
-# url casos de uso obligatorios
-https://automationexercise.com/api_list
-
-# cuenta de prueba
-- correo: warriol.game@gmail.com
-- usuario: testing012024
-- contraseña: test12345678
-
 # división de casos de uso por integrantes
 
-## todo
-npx playwright test --grep "@Todos"
+## comunes
+```bash
+# probar todos los test
+npx playwright test --grep "@todos"
+# probar solo las pruebas comunes
+npx playwright test --grep "@comunes"
+# probar solo las pruebas de Damian
+npx playwright test --grep "@Damian"
+# probar solo las pruebas de wilson
+npx playwright test --grep "@wilson"
+# probar solo las pruebas de API
+npx playwright test --grep "@api"
+```
 
-- [Test Case 1: Register User](https://automationexercise.com/test_cases#collapse1)
-- [Test Case 2: Login User with correct email and password](https://automationexercise.com/test_cases#collapse2)
+- [Test Case 1: Register User](https://automationexercise.com/test_cases#collapse1) <img src="https://img.shields.io/badge/CU_COMUN-Hecho-success">
+- [Test Case 2: Login User with correct email and password](https://automationexercise.com/test_cases#collapse2) <img src="https://img.shields.io/badge/CU_COMUN-Hecho-success">
 
 ## damian
 
@@ -67,26 +46,42 @@ npx playwright test --grep "@Todos"
 
 ## wilson
 
+- [Test Case 19: View & Cart Brand Products](https://automationexercise.com/test_cases#collapse19) <img src="https://img.shields.io/badge/CU_WILSON-Hecho-success">
+- [Test Case 20: Search Products and Verify Cart After Login](https://automationexercise.com/test_cases#collapse20) <img src="https://img.shields.io/badge/CU_WILSON-Hecho-success">
+- [Test Case 21: Add review on product](https://automationexercise.com/test_cases#collapse21) <img src="https://img.shields.io/badge/CU_WILSON-Hecho-success">
+- [Test Case 22: Add to cart from Recommended items](https://automationexercise.com/test_cases#collapse22) <img src="https://img.shields.io/badge/CU_WILSON-Hecho-success">
+- [Test Case 23: Verify address details in checkout page](https://automationexercise.com/test_cases#collapse23) <img src="https://img.shields.io/badge/CU_WILSON-Hecho-success">
+- [Test Case 24: Download Invoice after purchase order](https://automationexercise.com/test_cases#collapse24) <img src="https://img.shields.io/badge/CU_WILSON-Hecho-success">
+- [Test Case 25: Verify Scroll Up using 'Arrow' button and Scroll Down functionality](https://automationexercise.com/test_cases#collapse25) <img src="https://img.shields.io/badge/CU_WILSON-Hecho-success">
+- [Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functionality](https://automationexercise.com/test_cases#collapse26) <img src="https://img.shields.io/badge/CU_WILSON-Hecho-success">
+
+# instalacion
 ```bash
-# probar solo las pruebas de wilson
-npx playwright test --grep "@wilson"
+npx playwright install 
+npm init playwright@latest
+# bloquear anuncios
+npm install --save @cliqz/adblocker-playwright
+# personalizar mensajes en consola
+npm install chalk
+# Entorno de desarrollo: Visual Studio Code
+# Complementos: Playwright test
+npm i --save-dev @playwright/test
 ```
 
-- [Test Case 19: View & Cart Brand Products](https://automationexercise.com/test_cases#collapse19)
-- [Test Case 20: Search Products and Verify Cart After Login](https://automationexercise.com/test_cases#collapse20)
-- [Test Case 21: Add review on product](https://automationexercise.com/test_cases#collapse21)
-- [Test Case 22: Add to cart from Recommended items](https://automationexercise.com/test_cases#collapse22)
-- [Test Case 23: Verify address details in checkout page](https://automationexercise.com/test_cases#collapse23)
-- [Test Case 24: Download Invoice after purchase order](https://automationexercise.com/test_cases#collapse24)
-- [Test Case 25: Verify Scroll Up using 'Arrow' button and Scroll Down functionality](https://automationexercise.com/test_cases#collapse25)
-- [Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functionality](https://automationexercise.com/test_cases#collapse26)
+# url para casos de prueba obligatorios
+https://automationexercise.com/test_cases
+# url para casos de uso de API opcionales
+https://automationexercise.com/api_list
+
+# cuenta de prueba
+- correo: warriol.game@gmail.com
+- usuario: testing012024
+- contraseña: test12345678
+
 
 
 # escribir el primer test
 npx playwright codegen http://automationexercise.com
-
-# bloquear anuncios
-npm install --save @cliqz/adblocker-playwright
 
 # ejecutar test
 npx playwright test

@@ -6,7 +6,7 @@ import { verificarInicioDeSesion } from '../../../helpers/utils/iniciarSesion';
 import { ProductsPage } from '../../../helpers/pageObjects/productsPage';
 import { RegistrarUsuario } from '../../../helpers/utils/registrarUsuario';
 
-test.describe('Test realizados por Damian', {tag:'@Damian'}, () => {
+test.describe('Test realizados por Damian', {tag: ['@Damian', '@todos']}, () => {
 
   // datos para la creación de usuarios
   const userHelper = new UserHelper();
@@ -20,7 +20,7 @@ test.describe('Test realizados por Damian', {tag:'@Damian'}, () => {
   });
   //Case 3
 
-  test('Test Case 3', {tag:'@cu03'}, async ({ page }) {
+  test('Test Case 3', {tag:'@cu03'}, async ({ page }) => {
     await page.goto('https://automationexercise.com/');
     await expect(page.locator('#header')).toContainText('Home');
     await page.getByRole('link', { name: ' Signup / Login' }).click();

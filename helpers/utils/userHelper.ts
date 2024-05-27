@@ -8,7 +8,7 @@ export class UserHelper {
     private fName = "wilson";
     private lName = "arriola";
     private review = "This is a review for the product. It is a good product. I recommend it.";
-
+    private urlBase = "https://automationexercise.com/api";
     private registrarUsuario = [{
         name: 'testing0120245',
         email: 'prueba.warriol@gmail.com',
@@ -59,4 +59,7 @@ export class UserHelper {
         return this.review;
     }
 
+    public getUrlBase() {
+        return this.urlBase;
+    }
 }

@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { UserHelper } from '../../helpers/utils/userHelper';
+import { UserHelper } from '../../../helpers/utils/userHelper';
 
-test('Test Case 0: Crear usuario de prueba', {tag:'@Todos'}, async ({ page }) => {
-  const userHelper = new UserHelper(page);
+test('Test Case utiles: Crear usuario de prueba', async ({ page }) => {
+  const userHelper = new UserHelper();
 
   await page.goto('https://automationexercise.com/');
   await expect(page.getByRole('link', { name: 'Home' })).toBeVisible();
