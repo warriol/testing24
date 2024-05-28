@@ -29,6 +29,27 @@ export class UserHelper {
         city: 'singapore',
         zip: '12456',
         mobile: '123456789',
+    },
+    {
+        name: 'testingDV',
+        email: 'prueba.damivera47@gmail.com',
+        title: 'Mr.',
+        password: 'test12345678',
+        day: '8',
+        month: '2',
+        year: '1980',
+        newsletter: true,
+        offers: true,
+        fName: 'Damian',
+        lName: 'Vera',
+        company: 'utu',
+        address: 'rivera sin numero',
+        address2: '',
+        country: 'Singapore',
+        state: 'singapore',
+        city: 'singapore',
+        zip: '12456',
+        mobile: '123456789',
     }];
 
     public registrarUsuarioDto() {
