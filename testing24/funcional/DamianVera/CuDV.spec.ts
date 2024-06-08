@@ -49,6 +49,7 @@ test.describe('Test realizados por Damian', { tag: ['@Damian', '@todos'] }, () =
     test('Test Case 5', { tag: '@cu05' }, async ({ page }) => {
       MensajesConsola.mensajeInicio('5');
       MensajesConsola.mensajeTitulo('registrar usuario con correo electrónico existente');
+      await page.waitForTimeout(4000); 
       await page.goto('https://automationexercise.com/');
       await page.getByRole('link', { name: ' Signup / Login' }).click();
       await expect(page.locator('#form')).toContainText('New User Signup!');
@@ -57,7 +58,6 @@ test.describe('Test realizados por Damian', { tag: ['@Damian', '@todos'] }, () =
       await page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').fill(userHelper.registrarUsuarioDto()[1].email);
       await page.getByRole('button', { name: 'Signup' }).click();
       await expect(page.locator('#form')).toContainText('Email Address already exist!');
-      //Extra para poder rejecutar 4 y 5 devuelta
       await borrarCuentaRegistro(page,userHelper,1);
       MensajesConsola.mensajeFin('5');
     });
@@ -97,6 +97,8 @@ test.describe('Test realizados por Damian', { tag: ['@Damian', '@todos'] }, () =
       await home(page);
       await page.getByRole('link', { name: ' Test Cases' }).click();
       await expect(page.locator('b')).toBeVisible();
+      await page.waitForTimeout(1000); 
+
       await expect(page.locator('span')).toContainText('Below is the list of test Cases for you to practice the Automation. Click on the scenario for detailed Test Steps:');
       MensajesConsola.mensajeFin('7');
     });
