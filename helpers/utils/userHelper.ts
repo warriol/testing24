@@ -52,6 +52,29 @@ export class UserHelper {
         mobile: '123456789',
     }];
 
+    public getJsonUsuarioDto(id) {
+        let json = {
+            "name": this.registrarUsuario[id].name,
+            "email": this.registrarUsuario[id].email,
+            "title": this.registrarUsuario[id].title,
+            "password": this.registrarUsuario[id].password,
+            "birth_date": this.registrarUsuario[id].day,
+            "birth_month": this.registrarUsuario[id].month,
+            "birth_year": this.registrarUsuario[id].year,
+            "firstname": this.registrarUsuario[id].fName,
+            "lastname": this.registrarUsuario[id].lName,
+            "company": this.registrarUsuario[id].company,
+            "address1": this.registrarUsuario[id].address,
+            "address2": this.registrarUsuario[id].address2,
+            "country": this.registrarUsuario[id].country,
+            "state": this.registrarUsuario[id].state,
+            "city": this.registrarUsuario[id].city,
+            "zipcode": this.registrarUsuario[id].zip,
+            "mobile_number": this.registrarUsuario[id].mobile,
+        }
+        return json;
+    }
+
     public registrarUsuarioDto() {
         return this.registrarUsuario;
     }

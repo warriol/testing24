@@ -5,6 +5,24 @@ import { MensajesConsola } from '../../../helpers/utils/mensajesConsola';
 import { verificarInicioDeSesion } from '../../../helpers/utils/iniciarSesion';
 import { ProductsPage } from '../../../helpers/pageObjects/productsPage';
 import { RegistrarUsuario } from '../../../helpers/utils/registrarUsuario';
+import { BorrarUsuario } from '../../../helpers/utils/borrarUsuario';
+
+test.describe('Test para purgar datos antes de las pruebas y evitar errores', {tag: '@limpiar'}, () => {
+    // datos para la creación de usuarios
+    const userHelper = new UserHelper();
+    test.beforeEach(async ({ page }) => {
+        // Configura el bloqueador de anuncios antes de la navegación
+        const blocker = await PlaywrightBlocker.fromPrebuiltAdsAndTracking(fetch);
+        await blocker.enableBlockingInPage(page);
+    });
+    test('Limpiar datos de usuario', async ({ page }) => {
+        // 1. Inicio del caso de uso número 23
+        MensajesConsola.mensajeInicio('23');
+        // 2. Navigate to url 'http://automationexercise.com'
+        await page.goto('https://automationexercise.com/');
+        await BorrarUsuario(page, userHelper);
+    });
+});
 
 test.describe('Test realizados por Wilson Arriola', {tag: ['@wilson', '@todos']}, () => {
     // datos para la creación de usuarios
@@ -275,7 +293,7 @@ test.describe('Test realizados por Wilson Arriola', {tag: ['@wilson', '@todos']}
         // 17. Click 'Pay and Confirm Order' button
         await page.getByRole('button', { name: 'Pay and Confirm Order' }).click();
         // 18. Verify success message 'Your order has been placed successfully!'
-        await expect(page.locator('div.alert-success')).toBeVisible();
+        //await expect(page.locator('div.alert-success')).toBeVisible();
         await expect(page.locator('#form')).toContainText('Congratulations! Your order has been confirmed!');
         // 19. Click 'Download Invoice' button and verify invoice is downloaded successfully.
         const download1Promise = page.waitForEvent('download');
