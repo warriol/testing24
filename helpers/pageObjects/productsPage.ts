@@ -13,4 +13,13 @@ export class ProductsPage {
   public seleccionarProducto() {
     return this.productos;
   }
+  private productoscase12 = [
+    { id: '#product-1', nombre: 'Blue Top', hover: 'body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(3) > div > div.single-products > div.productinfo.text-center', locator: 'div:nth-child(3) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn' },
+    { id: '#product-2', nombre: 'Men T-shirt', hover: 'body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > div:nth-child(4) > div > div.single-products > div.productinfo.text-center', locator: 'div:nth-child(4) > .product-image-wrapper > .single-products > .product-overlay > .overlay-content > .btn' },
+   ];
+   
+   public seleccionarProductocase12() {
+    return this.productoscase12;
+  }
 }
+
