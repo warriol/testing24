@@ -12,7 +12,7 @@
     "@types/node": "^20.12.11"
   },
   "dependencies": {
-    "@cliqz/adblocker-playwright": "^1.27.3",
+    "@cliqz/adblocker-playwright": "^1.27.11",
     "chalk": "^5.3.0"
   }
 }

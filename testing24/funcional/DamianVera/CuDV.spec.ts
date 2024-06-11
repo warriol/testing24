@@ -21,44 +21,59 @@ test.describe('Test realizados por Damian', { tag: ['@Damian', '@todos'] }, () =
   });
 
     test('Test Case 3', { tag: '@cu03' }, async ({ page }) => {
+      // 1. Inicio del caso de uso número 3
       MensajesConsola.mensajeInicio('3');
       MensajesConsola.mensajeTitulo('usuario que inicia sesión con correo electrónico y contraseña incorrectos');
+      // 2. Navigate to url 'http://automationexercise.com'
       await page.goto('https://automationexercise.com/');
+      // 3. Verify that home page is visible successfully
       await expect(page.locator('#header')).toContainText('Home');
+      // 4. Click on 'Signup / Login' button
       await page.getByRole('link', { name: ' Signup / Login' }).click();
-      await login(page, userHelper, true) ;
+      // 5. Verify 'Login to your account' is visible
+      // 6. Enter incorrect email address and password
+      // 7. Click 'login' button
+      //Se realiza estos tres pasos con un helper de un usuario existente para obtener error de correo o passwar incorrecto
+      await login(page, userHelper, true);
+      // 8. Verify error 'Your email or password is incorrect!' is visible
       await expect(page.locator('#form')).toContainText('Your email or password is incorrect!');
       MensajesConsola.mensajeFin('3');
     });
 
     test('Test Case 4', { tag: '@cu04'},  async ({ page }) => {
+      // 1. Inicio del caso de uso número 4
       MensajesConsola.mensajeInicio('4');
       MensajesConsola.mensajeTitulo('Cerrar sesión de usuario');
+      // 2. Navigate to url 'http://automationexercise.com'
       await page.goto('https://automationexercise.com/');
+      // 4. Click on 'Signup / Login' button
       await page.getByRole('link', { name: ' Signup / Login' }).click();
-      await RegistrarUsuario(page, userHelper, 1);
-      await expect(page.locator('b')).toContainText('Account Created!');
-      await page.getByRole('link', { name: 'Continue' }).click();
-      await expect(page.locator('#header')).toContainText('Logged in as ' + userHelper.registrarUsuarioDto()[1].name);
+      // 5. Verify 'Login to your account' is visible
+      // 6. Enter correct email address and password
+      // 7. Click 'login' button
+      await login(page, userHelper, false);
+      // 8. Verify that 'Logged in as username' is visible
+      await expect(page.locator('#header')).toContainText('Logged in as ' + await userHelper.getUser());
+      // 9. Click 'Logout' button
       await page.getByRole('link', { name: ' Logout' }).click();
+      //10. Verify that user is navigated to login page
       await expect(page.locator('#form')).toContainText('Login to your account');
       await home(page);
       MensajesConsola.mensajeFin('4');
     });
 
     test('Test Case 5', { tag: '@cu05' }, async ({ page }) => {
+      // 1. Inicio del caso de uso número 4
       MensajesConsola.mensajeInicio('5');
       MensajesConsola.mensajeTitulo('registrar usuario con correo electrónico existente');
-      await page.waitForTimeout(4000); 
       await page.goto('https://automationexercise.com/');
       await page.getByRole('link', { name: ' Signup / Login' }).click();
       await expect(page.locator('#form')).toContainText('New User Signup!');
       await page.getByPlaceholder('Name').click();
-      await page.getByPlaceholder('Name').fill(userHelper.registrarUsuarioDto()[1].name);
-      await page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').fill(userHelper.registrarUsuarioDto()[1].email);
+      await page.getByPlaceholder('Name').fill(await userHelper.getFName());
+      await page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').fill(await userHelper.getCorreo());
       await page.getByRole('button', { name: 'Signup' }).click();
       await expect(page.locator('#form')).toContainText('Email Address already exist!');
-      await borrarCuentaRegistro(page,userHelper,1);
       MensajesConsola.mensajeFin('5');
     });
 
