@@ -37,3 +37,17 @@ export async function RegistrarUsuario(page, userHelper, N_User = 0) {
     await page.getByLabel('Mobile Number *').fill(userHelper.registrarUsuarioDto()[N_User].mobile);
     await page.getByRole('button', { name: 'Create Account' }).click();
 }
+
+export async function cargarDatos(page, userHelper, N_User = 0) {
+    await page.goto('https://automationexercise.com/');
+    await expect(page.getByRole('link', { name: 'Home' })).toBeVisible();
+    await page.getByRole('link', { name: 'Signup / Login' }).click();
+    await RegistrarUsuario(page, userHelper, N_User); 
+    await expect(page.locator('b')).toContainText('Account Created!');
+    await page.getByRole('link', { name: 'Continue' }).click();
+    // 9. Click 'Logout' button
+    await page.getByRole('link', { name: ' Logout' }).click();
+    //10. Verify that user is navigated to login page
+    await expect(page.locator('#form')).toContainText('Login to your account');
+}
+

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { UserHelper } from '../../../helpers/utils/userHelper';
 
 test('Test Case utiles: Crear usuario de prueba', async ({ page }) => {
-  const userHelper = new UserHelper();
+  /*const userHelper = new UserHelper();
 
   await page.goto('https://automationexercise.com/');
   await expect(page.getByRole('link', { name: 'Home' })).toBeVisible();
@@ -46,5 +46,5 @@ test('Test Case utiles: Crear usuario de prueba', async ({ page }) => {
   await page.getByRole('link', { name: 'Continue' }).click();
   await expect(page.locator('#header')).toContainText('Logged in as testing012024');
   await page.getByRole('link', { name: 'Logout' }).click();
-  console.log('Usuario creado correctamente, fin del caso de prueba 0.');
+  console.log('Usuario creado correctamente, fin del caso de prueba 0.');*/
 });

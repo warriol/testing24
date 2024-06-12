@@ -3,7 +3,7 @@ import { PlaywrightBlocker } from '@cliqz/adblocker-playwright';
 import { UserHelper } from '../../../helpers/utils/userHelper';
 import { MensajesConsola } from '../../../helpers/utils/mensajesConsola';
 
-test.describe('Test realizados por Wilson Arriola', {tag: ['@api', '@todos']}, () => {
+test.describe.serial('Test realizados por Wilson Arriola', {tag: ['@api', '@todos']}, () => {
     // datos para la creación de usuarios
     const userHelper = new UserHelper();
 
@@ -220,7 +220,7 @@ test.describe('Test realizados por Wilson Arriola', {tag: ['@api', '@todos']}, (
         // Definir la URL de la API
         const apiUrl = userHelper.getUrlBase() + '/createAccount';
         // Realizar la petición POST a la API
-        const data = userHelper.getJsonUsuarioDto(0);
+        const data = userHelper.getJsonUsuarioDto(3);
         console.log(data);
         const response = await request.post(apiUrl, {
             form: data
@@ -243,7 +243,7 @@ test.describe('Test realizados por Wilson Arriola', {tag: ['@api', '@todos']}, (
         // Definir la URL de la API
         const apiUrl = userHelper.getUrlBase() + '/updateAccount';
         // Realizar la petición PUT
-        const data = userHelper.getJsonUsuarioDto(0);
+        const data = userHelper.getJsonUsuarioDto(3);
         const response = await request.put(apiUrl, {
             form: data
         });
@@ -263,7 +263,7 @@ test.describe('Test realizados por Wilson Arriola', {tag: ['@api', '@todos']}, (
     test('API 14: GET user account detail by email', {tag:'@api14'}, async ({ request }) => {
         MensajesConsola.mensajeInicio('CU - API 14: GET user account detail by email');
         // Definir la URL de la API
-        const apiUrl = userHelper.getUrlBase() + '/getUserDetailByEmail?email=' + userHelper.registrarUsuarioDto()[0].email;
+        const apiUrl = userHelper.getUrlBase() + '/getUserDetailByEmail?email=' + userHelper.registrarUsuarioDto()[3].email;
         // Realizar la petición GET a la API
         const response = await request.get(apiUrl);
         // Verificar que la respuesta sea 200 OK
@@ -276,8 +276,8 @@ test.describe('Test realizados por Wilson Arriola', {tag: ['@api', '@todos']}, (
         expect(responseBody.responseCode).toBe(200);
         // Verificar que el mensaje sea: "User found!"
         expect(responseBody.user).toMatchObject({
-            "name": "testing0120245",
-            "email": "prueba.warriol@gmail.com",
+            "name": "apiTest",
+            "email": "api.cosumoApi@gmail.com",
             "title": "Mr.",
             "birth_day": "8",
             "birth_month": "2",
@@ -302,8 +302,8 @@ test.describe('Test realizados por Wilson Arriola', {tag: ['@api', '@todos']}, (
         // Realizar la petición DELETE a la API
         const response = await request.delete(apiUrl, {
             form: {
-                email: userHelper.registrarUsuarioDto()[0].email,
-                password: userHelper.registrarUsuarioDto()[0].password
+                email: userHelper.registrarUsuarioDto()[3].email,
+                password: userHelper.registrarUsuarioDto()[3].password
             }
         }
         );

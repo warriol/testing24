@@ -2,7 +2,7 @@ import { test} from '@playwright/test';
 import { UserHelper } from '../../../helpers/utils/userHelper';
 
 test('Test Case Utiles: borrar cuenta de prueba', { tag: '@borrar' }, async ({ page }) => {
-  const userHelper = new UserHelper();
+  /*const userHelper = new UserHelper();
 
   await page.goto('https://automationexercise.com/');
   await page.getByRole('link', { name: 'Signup / Login' }).click();
@@ -13,5 +13,5 @@ test('Test Case Utiles: borrar cuenta de prueba', { tag: '@borrar' }, async ({ p
   await page.getByRole('button', { name: 'Login' }).click();
   await page.getByRole('link', { name: 'Delete Account' }).click();
   await page.getByRole('link', { name: 'Continue' }).click();
-  console.log('Usuario eliminado correctamente, fin del caso de prueba 1.');
+  console.log('Usuario eliminado correctamente, fin del caso de prueba 1.');*/
 });
