@@ -15,6 +15,8 @@ npx playwright test --grep "@comunes"
 npx playwright test --grep "@Damian"
 # probar solo las pruebas de wilson
 npx playwright test --grep "@wilson"
+# probar solo las pruebas de Leandro
+npx playwright test --grep "@Leandro"
 # probar solo las pruebas de API
 npx playwright test --grep "@api"
 ```
